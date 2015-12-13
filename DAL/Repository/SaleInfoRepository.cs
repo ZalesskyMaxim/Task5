@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
-    public class SaleInfoRepository : AbstractRepository, IModelRepository<DAL.Models.SaleInfo, Model.SaleInfo>
+    public class SaleInfoRepository : AbstractRepository, IModelRepository<DAL.Models.SaleInfo, Model.Managers.SaleInfo>
     {
-        Model.SaleInfo ToEntity(DAL.Models.SaleInfo source)
+        Model.Managers.SaleInfo ToEntity(DAL.Models.SaleInfo source)
         {
-            return new Model.SaleInfo()
+            return new Model.Managers.SaleInfo()
             {
                 SaleDate = source.SaleDate,
                 ID_Manager = source.ID_Manager,
@@ -19,7 +19,7 @@ namespace DAL.Repository
             };
         }
 
-        DAL.Models.SaleInfo ToObject(Model.SaleInfo source)
+        DAL.Models.SaleInfo ToObject(Model.Managers.SaleInfo source)
         {
             return new DAL.Models.SaleInfo()
             {
@@ -30,15 +30,21 @@ namespace DAL.Repository
             };
         }
 
-        public Model.SaleInfo GetEntity(DAL.Models.SaleInfo source)
+        public Model.Managers.SaleInfo GetEntity(DAL.Models.SaleInfo source)
         {
             var entity = this.managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == source.ID_Sale);
             return entity;
         }
 
-        public Model.SaleInfo GetEntityNameById(int id)
+        public Model.Managers.SaleInfo GetEntityNameById(int id)
         {
             var entity = this.managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == id);
+            return entity;
+        }
+
+        public Model.Managers.SaleInfo GetEntityIDByName(string name)
+        {
+            var entity = this.managersContext.SaleInfo.FirstOrDefault(x => x.Manager.ManagerName == name);
             return entity;
         }
 

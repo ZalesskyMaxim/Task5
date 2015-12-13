@@ -9,10 +9,10 @@ namespace WindowsService
 {
     public class DatabaseHandler
     {
-        private IModelRepository<DAL.Models.Manager, Model.Manager> _managerRepository;
-        private IModelRepository<DAL.Models.Client, Model.Client> _clientRepository;
-        private IModelRepository<DAL.Models.Product, Model.Product> _productRepository;
-        private IModelRepository<DAL.Models.SaleInfo, Model.SaleInfo> _saleInfoRepository;
+        private IModelRepository<DAL.Models.Manager, Model.Managers.Manager> _managerRepository;
+        private IModelRepository<DAL.Models.Client, Model.Managers.Client> _clientRepository;
+        private IModelRepository<DAL.Models.Product, Model.Managers.Product> _productRepository;
+        private IModelRepository<DAL.Models.SaleInfo, Model.Managers.SaleInfo> _saleInfoRepository;
 
         public DatabaseHandler()
         {
@@ -22,7 +22,6 @@ namespace WindowsService
             _saleInfoRepository = new SaleInfoRepository();
         }
 
-        //public void AddToDatabase(string managerName, string saleDate, string clientName, string productName, string productCost)
         public void AddToDatabase(Journal journal)
         {
             lock (this)

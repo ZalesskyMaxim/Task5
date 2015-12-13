@@ -36,9 +36,13 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -48,28 +52,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs">
+    <Compile Include="Managers\Client.cs">
       <DependentUpon>DBManagersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBManagersModel.Context.cs">
+    <Compile Include="Managers\DBManagersModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DBManagersModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBManagersModel.cs">
+    <Compile Include="Managers\DBManagersModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DBManagersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBManagersModel.Designer.cs">
+    <Compile Include="Managers\DBManagersModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DBManagersModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Manager.cs">
+    <Compile Include="Managers\Manager.cs">
       <DependentUpon>DBManagersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Product.cs">
+    <Compile Include="Managers\Product.cs">
+      <DependentUpon>DBManagersModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\sysdiagrams.cs">
       <DependentUpon>DBManagersModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,25 +85,36 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SaleInfo.cs">
+    <Compile Include="Managers\SaleInfo.cs">
       <DependentUpon>DBManagersModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users\UserRepository\IRepository.cs" />
+    <Compile Include="Users\UserRepository\Proxy\User.cs" />
+    <Compile Include="Users\UserRepository\SqlRepository.cs" />
+    <Compile Include="Users\UserRepository\UsersModels\Role.cs" />
+    <Compile Include="Users\UserRepository\UsersModels\User.cs" />
+    <Compile Include="Users\UserRepository\UsersModels\UserRole.cs" />
+    <Compile Include="Users\UsersModel\UsersModel.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsersModel.dbml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <EntityDeploy Include="DBManagersModel.edmx">
+    <EntityDeploy Include="Managers\DBManagersModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DBManagersModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DBManagersModel.Context.tt">
+    <None Include="Managers\DBManagersModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBManagersModel.edmx</DependentUpon>
       <LastGenOutput>DBManagersModel.Context.cs</LastGenOutput>
     </None>
-    <None Include="DBManagersModel.edmx.diagram">
+    <None Include="Managers\DBManagersModel.edmx.diagram">
       <DependentUpon>DBManagersModel.edmx</DependentUpon>
     </None>
-    <None Include="DBManagersModel.tt">
+    <None Include="Managers\DBManagersModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBManagersModel.edmx</DependentUpon>
       <LastGenOutput>DBManagersModel.cs</LastGenOutput>
@@ -106,10 +124,22 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Users\UsersModel\UsersModel.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>UsersModel.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Users\UsersModel\UsersModel.dbml.layout">
+      <DependentUpon>UsersModel.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

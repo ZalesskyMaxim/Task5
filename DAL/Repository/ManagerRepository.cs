@@ -7,17 +7,17 @@ using Model;
 
 namespace DAL.Repository
 {
-    public class ManagerRepository : AbstractRepository, IModelRepository<DAL.Models.Manager, Model.Manager>
+    public class ManagerRepository : AbstractRepository, IModelRepository<DAL.Models.Manager, Model.Managers.Manager>
     {
-        Model.Manager ToEntity(DAL.Models.Manager source)
+        Model.Managers.Manager ToEntity(DAL.Models.Manager source)
         {
-            return new Model.Manager() 
+            return new Model.Managers.Manager() 
             { 
                 ManagerName = source.ManagerName
             };
         }
 
-        DAL.Models.Manager ToObject(Model.Manager source)
+        DAL.Models.Manager ToObject(Model.Managers.Manager source)
         {
             return new DAL.Models.Manager() 
             {
@@ -25,7 +25,7 @@ namespace DAL.Repository
             };
         }
 
-        public Model.Manager GetEntity(DAL.Models.Manager source)
+        public Model.Managers.Manager GetEntity(DAL.Models.Manager source)
         {
             var entity = this.managersContext.Manager.FirstOrDefault(x => x.ManagerName == source.ManagerName);
             //return new Model.Manager()
@@ -35,9 +35,15 @@ namespace DAL.Repository
             return entity;
         }
 
-        public Model.Manager GetEntityNameById(int id)
+        public Model.Managers.Manager GetEntityNameById(int id)
         {
             var entity = this.managersContext.Manager.FirstOrDefault(x => x.ID_Manager == id);
+            return entity;
+        }
+
+        public Model.Managers.Manager GetEntityIDByName(string name)
+        {
+            var entity = this.managersContext.Manager.FirstOrDefault(x => x.ManagerName == name);
             return entity;
         }
 
@@ -78,7 +84,7 @@ namespace DAL.Repository
             get
             {
                 var b = new List<DAL.Models.Manager>();
-                foreach (var a in this.managersContext.Manager.Select(x => x))
+                foreach (var a in managersContext.Manager.Select(x => x))
                 {
                     b.Add(ToObject(a));
                 }

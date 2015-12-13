@@ -1,0 +1,53 @@
+﻿@model Task5MVCProject.Models.SaleRowsModel
+@{
+    ViewBag.Title = "SalesIndex";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SalesIndex</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                Имя
+            </td>
+            <td>
+                Дата
+            </td>
+            <td>
+                Клиент
+            </td>
+            <td>
+                Продукт
+            </td>
+            <td>
+                Стоимость
+            </td>
+        </tr>
+    </thead>
+    @foreach (var item in Model.ListRow)
+    {
+        <tr>
+            <td>
+                @item.ManagerName
+            </td>
+            <td>
+                @item.Date
+            </td>
+            <td>
+                @item.ClientName
+            </td>
+            <td>
+                @item.ProductName
+            </td>
+            <td>
+                @item.ProductCost
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "Edit", "Sales", new { id = item.ManagerName }, new { @class = "btn  btn-mini" })
+                @Html.ActionLink("Удалить", "Delete", "Sales", new { id = item.ManagerName }, new { @class = "btn  btn-mini btn-danger" })
+            </td>
+        </tr>
+    }
+</table>

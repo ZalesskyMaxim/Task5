@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
-    public class CilentRepository : AbstractRepository, IModelRepository<DAL.Models.Client, Model.Client>
+    public class CilentRepository : AbstractRepository, IModelRepository<DAL.Models.Client, Model.Managers.Client>
     {
-        Model.Client ToEntity(DAL.Models.Client source)
+        Model.Managers.Client ToEntity(DAL.Models.Client source)
         {
-            return new Model.Client()
+            return new Model.Managers.Client()
             {
                 ClientName = source.ClientName
             };
         }
 
-        DAL.Models.Client ToObject(Model.Client source)
+        DAL.Models.Client ToObject(Model.Managers.Client source)
         {
             return new DAL.Models.Client()
             {
@@ -24,15 +24,21 @@ namespace DAL.Repository
             };
         }
 
-        public Model.Client GetEntity(DAL.Models.Client source)
+        public Model.Managers.Client GetEntity(DAL.Models.Client source)
         {
             var entity = this.managersContext.Client.FirstOrDefault(x => x.ClientName == source.ClientName);
             return entity;
         }
 
-        public Model.Client GetEntityNameById(int id)
+        public Model.Managers.Client GetEntityNameById(int id)
         {
             var entity = this.managersContext.Client.FirstOrDefault(x => x.ID_Client == id);
+            return entity;
+        }
+
+        public Model.Managers.Client GetEntityIDByName(string name)
+        {
+            var entity = this.managersContext.Client.FirstOrDefault(x => x.ClientName == name);
             return entity;
         }
 

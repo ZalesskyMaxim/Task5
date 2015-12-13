@@ -14,10 +14,10 @@ namespace ManagersForm
 {
     public partial class Form1 : Form
     {
-        IModelRepository<DAL.Models.Manager, Model.Manager> managerRepository;
-        IModelRepository<DAL.Models.Client, Model.Client> clientRepository;
-        IModelRepository<DAL.Models.Product, Model.Product> productRepository;
-        IModelRepository<DAL.Models.SaleInfo, Model.SaleInfo> saleInfoRepository;
+        IModelRepository<DAL.Models.Manager, Model.Managers.Manager> managerRepository;
+        IModelRepository<DAL.Models.Client, Model.Managers.Client> clientRepository;
+        IModelRepository<DAL.Models.Product, Model.Managers.Product> productRepository;
+        IModelRepository<DAL.Models.SaleInfo, Model.Managers.SaleInfo> saleInfoRepository;
         public Form1()
         {
             managerRepository = new ManagerRepository();

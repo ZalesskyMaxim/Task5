@@ -17,15 +17,11 @@ namespace WindowsService
         }
         public void SaveRecords(string path)
         {
-            //lock (this)
-            //{
                 var records = _parser.ParseData(path);
                 foreach (var record in records)
                 {
                     _dbHandler.AddToDatabase(record);
-                }
-            //}
-            
+                }  
         }
     }
 }

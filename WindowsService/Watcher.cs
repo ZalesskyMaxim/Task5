@@ -12,7 +12,6 @@ namespace WindowsService
     {
         private RecordsHandler _recordsHandler;
         private FileSystemWatcher _fileWatcher;
-        //private TaskFactory _taskFactory = new System.Threading.Tasks.TaskFactory();
         private Task task;
 
         public Watcher()
@@ -22,9 +21,6 @@ namespace WindowsService
             _fileWatcher.Path = ConfigurationManager.AppSettings["Path"];
             _fileWatcher.Filter = "*.csv";
             _fileWatcher.NotifyFilter = NotifyFilters.FileName;
-           // watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
-           //| NotifyFilters.FileName | NotifyFilters.DirectoryName;
-
 
             _fileWatcher.Changed += new FileSystemEventHandler(OnChanged);
             _fileWatcher.Created += new FileSystemEventHandler(OnChanged);
@@ -37,7 +33,6 @@ namespace WindowsService
         }
         public void OnChanged(object source, FileSystemEventArgs e)
         {
-            //_taskFactory.StartNew(() => Parser.ParseData(t));
             task = new Task(() => CallParse(source, e));
             task.Start();
         }

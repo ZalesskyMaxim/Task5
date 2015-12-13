@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
-    public class ProductRepository : AbstractRepository, IModelRepository<DAL.Models.Product, Model.Product>
+    public class ProductRepository : AbstractRepository, IModelRepository<DAL.Models.Product, Model.Managers.Product>
     {
-        Model.Product ToEntity(DAL.Models.Product source)
+        Model.Managers.Product ToEntity(DAL.Models.Product source)
         {
-            return new Model.Product()
+            return new Model.Managers.Product()
             {
                 ProductName = source.ProductName,
                 ProductCost = source.ProductCost
             };
         }
 
-        DAL.Models.Product ToObject(Model.Product source)
+        DAL.Models.Product ToObject(Model.Managers.Product source)
         {
             return new DAL.Models.Product()
             {
@@ -26,15 +26,21 @@ namespace DAL.Repository
             };
         }
 
-        public Model.Product GetEntity(DAL.Models.Product source)
+        public Model.Managers.Product GetEntity(DAL.Models.Product source)
         {
             var entity = this.managersContext.Product.FirstOrDefault(x => x.ProductName == source.ProductName && x.ProductCost == source.ProductCost);
             return entity;
         }
 
-        public Model.Product GetEntityNameById(int id)
+        public Model.Managers.Product GetEntityNameById(int id)
         {
             var entity = this.managersContext.Product.FirstOrDefault(x => x.ID_Product == id);
+            return entity;
+        }
+
+        public Model.Managers.Product GetEntityIDByName(string name)
+        {
+            var entity = this.managersContext.Product.FirstOrDefault(x => x.ProductName == name);
             return entity;
         }
 
@@ -75,7 +81,13 @@ namespace DAL.Repository
         {
             get
             {
-                return this.managersContext.Product.Select(x => this.ToObject(x));
+                var b = new List<DAL.Models.Product>();
+                foreach (var a in managersContext.Product.Select(x => x))
+                {
+                    b.Add(ToObject(a));
+                }
+
+                return b;
             }
         }
 
